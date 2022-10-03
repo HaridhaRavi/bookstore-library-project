@@ -3,6 +3,7 @@ const Book = require("../models/Book.model");
 
 
 /* GET all the books from DB */
+//READ:get all books
 router.get("/books", (req, res, next) => {
     Book.find()
         .then(booksFromDb =>{
@@ -14,7 +15,7 @@ router.get("/books", (req, res, next) => {
             next();
         })
 });
-
+//READ: get the book by id
 router.get("/books/:bookId", (req, res, next) => {
     const bookId = req.params.bookId;
     Book.findById(bookId)
@@ -28,6 +29,30 @@ router.get("/books/:bookId", (req, res, next) => {
         })
     
 });
+
+//
+//creating data
+//
+
+//CREATE : display form
+router.get("/books/create",(req,res,next)=>{
+    res.render("books/book-create")
+})
+
+//CREATE: saving to db
+router.post("/books/create",(req,res,next)=>{
+    const {title, author, description, rating}=req.body;
+    //console.log({title, author, description, rating})
+    Book.create({title, author, description, rating})
+        .then((response)=>{
+            console.log("Data is created",response)
+            res.send("Data is created Successfully")
+        })
+        .catch(err => {
+            console.log("Error saving/creating data",err)
+            next();
+        })
+})
 
 module.exports = router;
 
