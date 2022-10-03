@@ -45,8 +45,8 @@ router.post("/books/create",(req,res,next)=>{
     //console.log({title, author, description, rating})
     Book.create({title, author, description, rating})
         .then((response)=>{
-            console.log("Data is created",response)
-            res.send("Data is created Successfully")
+            console.log("Data is created Successfully",response)
+            res.redirect("/books")
         })
         .catch(err => {
             console.log("Error saving/creating data",err)
