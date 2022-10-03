@@ -8,6 +8,13 @@
         <strong>Description:</strong>
         {{description}}
     </p>
+
+    <p>
+        <form action="/books/{{_id}}/delete" method="POST">
+            <button>Delete</button>
+        </form>
+    </p>
+
 </section>
 
 <a href="/books">Back</a>
