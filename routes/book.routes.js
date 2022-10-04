@@ -39,7 +39,15 @@ router.get("/books/:bookId", (req, res, next) => {
 
 //CREATE : display form
 router.get("/books/create",(req,res,next)=>{
-    res.render("books/book-create")
+    Author.find()
+    .then((authorsList) => {
+        console.log(authorsList);
+        res.render("books/book-create",{authorsList})
+    })
+    .catch((err) => {
+        console.log("Error getting authors list from db",err)
+    })
+    
 })
 
 //CREATE: saving to db
