@@ -7,8 +7,7 @@
 
   <label> Author:
     <select name="author">
-        <option disabled selected value> -- select an option -- </option>
-      {{#each authorsList}}
+      {{#each authorsArr}}
         <option value="{{this._id}}">{{this.name}}</option>
       {{/each}}
     </select>

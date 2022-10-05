@@ -42,7 +42,7 @@ router.get("/books/create",(req,res,next)=>{
     Author.find()
     .then((authorsList) => {
         console.log(authorsList);
-        res.render("books/book-create",{authorsList})
+        res.render("books/book-create",{authors: authorsList})
     })
     .catch((err) => {
         console.log("Error getting authors list from db",err)
