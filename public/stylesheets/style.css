@@ -10,3 +10,13 @@ a {
 h1 {
   color: 15px;
 }
+
+header {
+  background-color: #00b7ff;
+  padding: 1rem;
+  
+}
+header a{
+  color: white;
+  text-decoration: none;
+}

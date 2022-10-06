@@ -10,7 +10,32 @@
    </head>
 
    <body>
-
+      <header>
+         <nav>
+         <a href="/authors">Authors</a> | 
+         <a href="/authors/create">Create new author</a> | 
+         <a href="/books">Books</a> | 
+         <a href="/books/create">Create new book</a>
+         <br />
+         </nav>
+         
+         <nav>
+            
+            
+            {{#if userInSession}}
+            Hello, {{ userInSession.email }}! |
+            <a href ="/user-profile">User Profile</a> 
+               <form action="/logout" method="POST">
+               <button>Logout</button>
+               </form>
+            {{else}}
+               <P>User is not loggedin.....</P>
+               <a href="/signup">Create an account</a> | 
+               <a href="/login">Login</a>
+            {{/if}}
+         </nav>
+         
+      </header>
       {{{body}}}
 
       <script src="/js/script.js"></script>
