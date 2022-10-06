@@ -22,6 +22,7 @@ require("./config")(app);
 require('./config/session.config')(app);
 
 
+
 // default value for title local
 const capitalized = require("./utils/capitalized");
 const projectName = "library-project";
@@ -29,11 +30,32 @@ const projectName = "library-project";
 app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
 
 app.use((req, res, next) => {
+  console.log("custom middleware 1.....")
     // Make `user` and `authenticated` available in templates
     res.locals.userInSession = req.session.currentUser
    // res.locals.authenticated = !req.user.anonymous
     next()
   })
+
+//
+//MIDDLEWARE FUNCTION
+//
+
+
+//created a file is loggedin
+// app.use("/books/create", (req, res, next) => {
+
+//   console.log("custom middleware 2.....")
+
+//   if(req.session.currentUser){
+//       next();
+//   } else {
+//       res.redirect("/login")
+//   }
+// })
+// app.use("/authors/",isLoggedIn);
+// app.use("/books/",isLoggedIn);
+
 
 
 // 👇 Start handling routes here

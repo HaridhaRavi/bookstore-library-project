@@ -1,7 +1,7 @@
 const Author = require("../models/Author.model");
 
 const router = require("express").Router();
-
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 //READ: List all authors
 router.get("/authors", (req, res, next) => {
@@ -16,11 +16,11 @@ router.get("/authors", (req, res, next) => {
 });
 
 //CREATE
-router.get("/authors/create", (req, res, next) => {
+router.get("/authors/create", isLoggedIn,(req, res, next) => {
     res.render("authors/author-create");
 });
 
-router.post("/authors/create", (req, res, next) => {
+router.post("/authors/create", isLoggedIn,(req, res, next) => {
     const {name , age, country} = req.body;
     const authorData = {name , age, country};
     Author.create(authorData)

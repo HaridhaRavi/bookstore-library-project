@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 
 /* GET all the books from DB */
@@ -38,7 +39,7 @@ router.get("/books/:bookId", (req, res, next) => {
 //
 
 //CREATE : display form
-router.get("/books/create",(req,res,next)=>{
+router.get("/books/create",isLoggedIn,(req,res,next)=>{
     Author.find()
     .then((authorsList) => {
         console.log(authorsList);
@@ -51,7 +52,7 @@ router.get("/books/create",(req,res,next)=>{
 })
 
 //CREATE: saving to db
-router.post("/books/create",(req,res,next)=>{
+router.post("/books/create",isLoggedIn,(req,res,next)=>{
     const {title, author, description, rating}=req.body;
     //console.log({title, author, description, rating})
     Book.create({title, author, description, rating})
@@ -66,7 +67,7 @@ router.post("/books/create",(req,res,next)=>{
 })
 
 //UPDATE: display form
-router.get("/books/:bookId/edit", (req, res, next) => {
+router.get("/books/:bookId/edit", isLoggedIn,(req, res, next) => {
     Book.findById(req.params.bookId)
       .then( (bookDetails) => {
         res.render("books/book-edit", bookDetails);
@@ -78,7 +79,7 @@ router.get("/books/:bookId/edit", (req, res, next) => {
 });
 
 //UPDATE : process data
-router.post("/books/:bookId/edit",(req,res,next) =>{
+router.post("/books/:bookId/edit",isLoggedIn,(req,res,next) =>{
     const {title, author, description, rating} = req.body;
     const newBookDetails = {title, author, description, rating};
     const bookId = req.params.bookId;
@@ -94,7 +95,7 @@ router.post("/books/:bookId/edit",(req,res,next) =>{
 
 
 //DELETE
-router.post("/books/:bookId/delete", (req, res, next) => {
+router.post("/books/:bookId/delete", isLoggedIn, (req, res, next) => {
     Book.findByIdAndDelete(req.params.bookId)
       .then(() => {
         res.redirect("/books");
